@@ -10,9 +10,10 @@
 }
 .custom_button {
   background-color: #8c5ca4 !important;
-  color: white !important;
+  color: #c3c3d3 !important;
 }
 .custom_button:hover {
+  color: #dedee7 !important;
   background-color: #8c5ca4 !important;
 }
 .sub_card_bg {
@@ -51,10 +52,11 @@ body {
 
 .custom_nav {
   background-color: #1c2441;
+  padding: 10px 0px;
 }
 
-.custom_nav a {
+.nav_logo_title {
+  font-size: 19px;
+  font-weight: 500;
   color: #b9b9d8 !important;
 }
-
-
