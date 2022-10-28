@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import abi from "../utils/BuyMeACoffee.json";
 import { ethers } from "ethers";
+import MainCard from "../components/MainCard";
+import LatestTransactionTable from "../components/LatestCoffeeBoughtTable";
+import LatestCoffeeBoughtTable from "../components/LatestCoffeeBoughtTable";
+import Navbar from "../components/Navbar";
 
 function Index() {
   const contractAddress = "0x8bd41849a3be6408Df57D801e744DF4244c5f79B";
@@ -99,34 +103,23 @@ function Index() {
     }
   };
 
-  console.log(memos)
-  // useEffect(() => {
-  //   let buyMeACoffee;
-  //   isWalletConnected();
-  //   getMemos();
-
-  //   // Create an event handler function for when someone sends
-  //   // us a new memo.
-  //   const onNewMemo = (from, timestamp, name, message) => {
-  //     console.log("Memo received: ", from, timestamp, name, message);
-  //     setMemos((prevState) => [
-  //       ...prevState,
-  //       {
-  //         address: from,
-  //         timestamp: new Date(timestamp * 1000),
-  //         message,
-  //         name
-  //       }
-  //     ]);
-  //   };
+  console.log(memos);
 
   return (
-    <div className="">
-      <button onClick={connectWallet}>connect</button>
-      <input onChange={onNameChange} name="name" type="text" placeholder="name" />
-      <input onChange={onMessageChange} name="message" type="text" placeholder="message" />
-      <button onClick={buyCoffee}>buy coffee</button>
-    </div>
+    // <div className="">
+    //   <button onClick={connectWallet}>connect</button>
+    //   <input onChange={onNameChange} name="name" type="text" placeholder="name" />
+    //   <input onChange={onMessageChange} name="message" type="text" placeholder="message" />
+    //   <button onClick={buyCoffee}>buy coffee</button>
+    // </div>
+
+    <>
+      <Navbar />
+      <div className="app_body  d-flex flex-column align-items-center gap-2 mt-5">
+        <MainCard />
+        <LatestCoffeeBoughtTable />
+      </div>
+    </>
   );
 }
 

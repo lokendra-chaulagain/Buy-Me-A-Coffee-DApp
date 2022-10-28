@@ -1,0 +1,60 @@
+.main_card {
+  background-color: #1c2441;
+  color: #b9b9d8 !important;
+}
+
+.custom_input_bg {
+  background-color: #3e4663 !important;
+  outline: none !important;
+  color: #b9b9d8 !important;
+}
+.custom_button {
+  background-color: #8c5ca4 !important;
+  color: white !important;
+}
+.custom_button:hover {
+  background-color: #8c5ca4 !important;
+}
+.sub_card_bg {
+  background-color: #3e4663 !important;
+  color: #b9b9d8 !important;
+}
+
+.text_color {
+  color: #b9b9d8 !important;
+}
+.input_icon_div {
+  background-color: #3e4663 !important;
+  color: #8c5ca4 !important;
+  cursor: pointer;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.05rem #8c5ca4 !important;
+}
+
+body {
+  background-color: #122b47 !important;
+  overflow-x: hidden;
+}
+
+.custom_warning_toast {
+  color: #303958 !important;
+  font-weight: 500 !important;
+}
+
+.connection_success_button {
+  border: 1px solid #8c5ca4 !important;
+  background-color: #8c5ca4 !important;
+  color: #b9b9d8 !important;
+}
+
+.custom_nav {
+  background-color: #1c2441;
+}
+
+.custom_nav a {
+  color: #b9b9d8 !important;
+}
+
+
