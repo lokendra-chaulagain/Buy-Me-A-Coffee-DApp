@@ -1,78 +1,57 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+//SPDX-License-Identifier: UNLICENSE
+pragma solidity ^0.8.9;
 
 contract BuyMeACoffee {
-    //event to emit when the memo is created
+    // Event to emit when a Memo is created.
     event NewMemo(
         address indexed from,
-        uint256 timestamp,
         string name,
-        string message
+        string message,
+        uint256 timestamp
     );
-    //indexed makes easier to search addresses
+    //indexed means search for index in this event
 
-    //memo struct
+    // Memo structure
     struct Memo {
-        address from;
-        uint256 timestamp;
-        string name;
+        address from; //address of sender
+        string name; // name of sender
         string message;
+        uint256 timestamp;
     }
 
-    //List of all memos received from friends .list of the Memo struct inside the memos
-    Memo[] memos;
-
-    //state variable payable means we can pay to this address
-    //this is the addres of the contract deployer /owner
+    // address of the contract deployer which is payable
     address payable owner;
 
-    //constructor runs only one time while the contract is being deployed
+    // List of all memos of type Memo struct.
+    Memo[] memos;
+
     constructor() {
-        owner = payable(msg.sender); //when I deploy the contract my metamask wallet address is the owner and can receive the amount
+        owner = payable(msg.sender);
     }
 
-    /**
-     * @dev buy a coffee for the contract owner
-     * @param _name name of the coffee buyer
-     * @param _message a message from the coffee buyer
-     */
+    // get all memos
+    function getMemos() public view returns (Memo[] memory) {
+        return memos;
+    }
+
+    // buy a coffee
     function buyCoffee(string memory _name, string memory _message)
         public
         payable
     {
-        require(msg.value > 0, "Cannot buy a coffee with 0 ether ");
-        //if condition success create a new memo
-        //New memo is created lets save it in to memos array
-        memos.push(
-            //this is our memo
-            Memo(
-                msg.sender, //who invoked this function
-                block.timestamp,
-                _name,
-                _message
-            )
-        );
-        //emit the event when the ne memo is created
-        emit NewMemo(msg.sender, block.timestamp, _name, _message);
+        require(msg.value > 0, "can't buy coffee for free!");
+        memos.push(Memo(msg.sender, _name, _message, block.timestamp));
+        // here msg.sender is the one who buys the coffee
+        emit NewMemo(msg.sender, _name, _message, block.timestamp);
     }
 
-    //Note all the balance get stored in balance and the owner can withdraw it
-
-    /**
-     * @dev send the entire balance stored in the contract to the owner
-     */
-    function withdrawTips() public {
-        //actually the balance is stored in ths balance variable of this contract address
-        address(this).balance; //this is whwere balance is stored
-        require(owner.send(address(this).balance)); //sending the balance to the owner only
-        //this is public function so anyone cal call it but we have given the require condition so only the
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
     }
 
-    /**
-     * @dev get all the momos stored on the blockchain
-     */
-    //it doesnot change any state on the blockchain so we use view so that it saves the gas
-    function getMemos() public view returns (Memo[] memory) {
-        return memos;
+    // owner can withdraw the amount
+    function withdrawTips() public onlyOwner {
+        require(owner.send(address(this).balance));
     }
 }
